@@ -25,7 +25,6 @@ public class AlipayTransfer {
         model.setOutBizNo(outBizNo);
         model.setTransAmount("0.1");
         model.setProductCode("TRANS_ACCOUNT_NO_PWD");
-
         Participant participant = new Participant();
         participant.setIdentity("");
         participant.setIdentityType("ALIPAY_LOGON_ID");
