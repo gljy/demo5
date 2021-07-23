@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * MBA智库文档下载
  * https://doc.mbalib.com/
+ *
+ * @author guild
  */
 public class MbalibArticleGrab {
 
@@ -25,7 +27,8 @@ public class MbalibArticleGrab {
         url = "https://doc.mbalib.com/view/1257157ef443a3ea84bf1bfc5f64a30e.html";
         url = "https://doc.mbalib.com/view/80f671e064a23ab8f429088d04843a7d.html";
 
-        WebDriver driver = createPhantomJSDriver();
+        // 无界面浏览器
+        WebDriver driver = createDriver();
         driver.get(url);
         List<WebElement> elements = driver.findElements(By.cssSelector("#viewer .page"));
         System.out.println("文档总页数：" + elements.size());
@@ -38,6 +41,7 @@ public class MbalibArticleGrab {
             WebElement element = elements.get(i);
             String text = element.getText();
             if (StrUtil.isEmpty(text)) {
+                // 移动至未加载文档位置
                 scrollIntoView(driver, element);
                 continue;
             }
@@ -52,21 +56,18 @@ public class MbalibArticleGrab {
         System.out.println("read complete!");
     }
 
-    // 打开文件
     static void openFile(File file) throws InterruptedException, IOException {
         String command = "rundll32 url.dll FileProtocolHandler " + file.toURI();
         Runtime.getRuntime().exec(command);
         Thread.sleep(500L);
     }
 
-    // 移动至未加载文档位置
     static void scrollIntoView(WebDriver driver, WebElement ele) throws InterruptedException {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", ele);
         Thread.sleep(500L);
     }
 
-    // 无界面浏览器
-    static PhantomJSDriver createPhantomJSDriver() {
+    static PhantomJSDriver createDriver() {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
                 "D:/Guild/browser-driver/phantomjs-2.1.1-windows/bin/phantomjs.exe");

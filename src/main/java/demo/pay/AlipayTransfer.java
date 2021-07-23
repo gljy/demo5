@@ -9,6 +9,11 @@ import com.alipay.api.domain.Participant;
 import com.alipay.api.request.AlipayFundTransUniTransferRequest;
 import com.alipay.api.response.AlipayFundTransUniTransferResponse;
 
+/**
+ * 支付宝转账
+ *
+ * @author guild
+ */
 public class AlipayTransfer {
 
     public static void main(String[] args) throws AlipayApiException {

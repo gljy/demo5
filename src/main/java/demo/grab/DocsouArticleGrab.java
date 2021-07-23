@@ -11,6 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 豆搜网文档下载
+ *
+ * @author guild
+ */
 public class DocsouArticleGrab {
 
     public static void main(String[] args) throws IOException {
